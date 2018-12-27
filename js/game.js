@@ -7,6 +7,15 @@ document.documentElement.style.overflow='hidden';
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
+//定义开始游戏按钮对象
+var startGameButton = {
+	img: startImage,
+	x: canvas.width/2-125, 
+	y: canvas.height/2+50,
+	endX: canvas.width/2-125 + 250, //x+250 图片横向的像素值是250
+	endY: canvas.height/2+50 + 100  //y+100 图片纵向的像素值是100
+}
+
 //定义我的人物
 var me = {
 	x: 0,
@@ -57,7 +66,7 @@ var drawStart = function () {
 		}
 	}
 	ctx.drawImage(logoImage, canvas.width/2-100, canvas.height/2-200);
-	ctx.drawImage(startImage, canvas.width/2-125, canvas.height/2+50);	
+	ctx.drawImage(startGameButton.img, startGameButton.x, startGameButton.y);	
 	requestAnimationFrame(drawStart);
 };
 
