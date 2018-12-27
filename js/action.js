@@ -33,6 +33,9 @@ function touch (event){
 **/
 var actionStartGameButton = function(touchX,touchY){
 	if(touchX >= startGameButton.x && touchX <= startGameButton.endX && touchY >= startGameButton.y && touchY <=startGameButton.endY){
-		alert("点击了开始按钮。");
+		//alert("点击了开始按钮。");
+		gameing = true ;
+		initGaming();
+		drawGaming();
 	}
 }

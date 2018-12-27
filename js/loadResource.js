@@ -22,7 +22,7 @@ var otherImage0_0 = new Image();
 otherImage0_0.src = "img/other0_0.png";
 //其他人物图片0_1
 var otherImage0_1 = new Image();
-otherImage0_0.src = "img/other0_1.png";
+otherImage0_1.src = "img/other0_1.png";
 
 //其他人物图片1_0
 var otherImage1_0 = new Image();
