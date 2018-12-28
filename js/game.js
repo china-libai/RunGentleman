@@ -7,6 +7,7 @@ document.documentElement.style.overflow='hidden';
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
+var stopStartPageId = null;//停止开始页面动画的requestAnimationFrame的id
 var gameing = false; //是否正在游戏
 var otherObjArray = new Array(25);//其他人物存放数组（其他人物个数不能超过位置数组总个数）
 var leftSiteObjArray = new Array(28);//定义左侧位置数组(人物会随机分配到对应的位置上)
@@ -77,11 +78,10 @@ var drawStart = function () {
 			me.directionChange = true;
 		}
 	}
-	
 	ctx.drawImage(logoImage, canvas.width/2-100, canvas.height/2-200);
 	ctx.drawImage(startGameButton.img, startGameButton.x, startGameButton.y);
 	if(!gameing){
-		requestAnimationFrame(drawStart);	
+        stopStartPageId = requestAnimationFrame(drawStart);
 	}
 };
 
@@ -100,7 +100,7 @@ var drawGaming = function(){
 		ctx.drawImage(otherTemp.imgArray[otherTemp.currentImgIndex],otherTemp.x,otherTemp.y);
 	}
 	if(gameing){
-		requestAnimationFrame(drawGaming);	
+		requestAnimationFrame(drawGaming);
 	}
 }
 
@@ -145,7 +145,7 @@ var initGaming = function(){
 		var shang = parseInt(i/4);//丢弃小数部分,保留整数部分
 		var yushu = i%4;//取余数
 		siteObjTemp.x = canvas.width/2 - 35*(yushu+1);
-		siteObjTemp.y = 2*canvas.height/3 - 35*shang;
+		siteObjTemp.y = 2*canvas.height/3 - 40*shang;
 		siteObjTemp.used = false;
 		leftSiteObjArray[i]=siteObjTemp;
 	}
@@ -160,7 +160,7 @@ var initGaming = function(){
 		var shang = parseInt(i/4);//丢弃小数部分,保留整数部分
 		var yushu = i%4;//取余数
 		siteObjTemp.x = canvas.width/2 + 5 + 35*(yushu);
-		siteObjTemp.y = 2*canvas.height/3 - 35*shang;
+		siteObjTemp.y = 2*canvas.height/3 - 40*shang;
 		siteObjTemp.used = false;
 		rightSiteObjArray[i]=siteObjTemp;
 	}
@@ -211,8 +211,8 @@ var initGaming = function(){
 	
 }
 
-//让对象跑起来（就是切换对象图片）
-var runObj = function(){
+//让我的对象跑起来（就是切换对象图片）
+var runMeObj = function(){
 	//更新我的人物图片
 	me.currentZhenIndex ++;
 	if(me.currentZhenIndex>=me.imgChangeCount){
@@ -222,22 +222,25 @@ var runObj = function(){
 			me.currentImgIndex = 0;
 		}
 	}
-	//更新其他人物图片
-	for(var i=0;i<otherObjArray.length;i++){
-		var otherObjTemp=otherObjArray[i];
-		otherObjTemp.currentZhenIndex ++;
-		if(otherObjTemp.currentZhenIndex>=otherObjTemp.imgChangeCount){
-			otherObjTemp.currentZhenIndex = 0;
-			otherObjTemp.currentImgIndex ++;
-			if(otherObjTemp.currentImgIndex >= me.imgArray.length){
-				otherObjTemp.currentImgIndex = 0;
-			}
-		}
-	}
-	requestAnimationFrame(runObj);	
+	requestAnimationFrame(runMeObj);
+}
+//让其他对象跑起来（就是切换对象图片）
+var runOtherObj = function(){
+    //更新其他人物图片
+    for(var i=0;i<otherObjArray.length;i++){
+        var otherObjTemp=otherObjArray[i];
+        otherObjTemp.currentZhenIndex ++;
+        if(otherObjTemp.currentZhenIndex>=otherObjTemp.imgChangeCount){
+            otherObjTemp.currentZhenIndex = 0;
+            otherObjTemp.currentImgIndex ++;
+            if(otherObjTemp.currentImgIndex >= me.imgArray.length){
+                otherObjTemp.currentImgIndex = 0;
+            }
+        }
+    }
+    requestAnimationFrame(runOtherObj);
 }
 
 initStart();
-initGaming();
 drawStart();
-runObj();
+runMeObj();
