@@ -38,6 +38,8 @@ var actionStartGameButton = function(touchX,touchY){
             initGaming();
             runOtherObj();
             drawGaming();
+		}else{
+            changeOtherObjCamp();
 		}
 	}
 }
