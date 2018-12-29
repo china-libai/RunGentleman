@@ -40,6 +40,24 @@ var startGameButton = {
 	endY: canvas.height/2+50 + 100  //y+100 图片纵向的像素值是100
 }
 
+//定义a按钮对象
+var aButton = {
+    img: buttonImage0,
+    x: 20,
+    y: canvas.height-100,
+    endX: 20 + 150, //x+150 图片横向的像素值是150
+    endY: canvas.height-100 + 49  //y+49 图片纵向的像素值是49
+}
+
+//定义b按钮对象
+var bButton = {
+    img: buttonImage0,
+    x: canvas.width-(170+20),
+    y: canvas.height-100,
+    endX: canvas.width/2-125 + 250, //x+250 图片横向的像素值是250
+    endY: canvas.height-100 +49  //y+100 图片纵向的像素值是100
+}
+
 //定义我的人物
 var me = {
 	x: 0,
@@ -111,8 +129,8 @@ var drawGaming = function(){
 		//题目背景图
         ctx.drawImage(titleImage, canvas.width/2-150, 20);
         //画出底部a,b选项按钮
-        ctx.drawImage(buttonImage0, 20, canvas.height-100);
-        ctx.drawImage(buttonImage0, canvas.width-(170+20), canvas.height-100);
+        ctx.drawImage(aButton.img, aButton.x, aButton.y);
+        ctx.drawImage(bButton.img, bButton.x, bButton.y);
         //画出试题
         ctx.fillStyle="rgb(0,0,0)";
         ctx.font="24px Helvetica";
@@ -121,11 +139,10 @@ var drawGaming = function(){
         ctx.fillText(items[0].title,canvas.width/2-150+12,20+45);
         //画出选项
         ctx.textAlign="center";
-        ctx.fillText(items[0].a,20+150/2, canvas.height-100+8);
-        ctx.fillText(items[0].b,canvas.width-(170+20)+150/2, canvas.height-100+8);
+        ctx.fillText(items[0].a,aButton.x+150/2, aButton.y+8);
+        ctx.fillText(items[0].b,bButton.x+150/2, bButton.y+8);
         //画出倒计时数字
         ctx.fillStyle="rgb(255,0,0)";
-        // ctx.textAlign="left";
         ctx.fillText(countDown,canvas.width/2-2, 29);
     }
 	if(gameing){
