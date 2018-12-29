@@ -37,3 +37,13 @@ otherImage2_0.src = "img/other2_0.png";
 //其他人物图片2_1
 var otherImage2_1 = new Image();
 otherImage2_1.src = "img/other2_1.png";
+
+//顶部试题题目框
+var titleImage = new Image();
+titleImage.src="img/title.png";
+
+//底部按钮条图片
+var buttonImage0 = new Image();
+buttonImage0.src="img/button0.png";
+var buttonImage1 = new Image();
+buttonImage1.src="img/button1.png";

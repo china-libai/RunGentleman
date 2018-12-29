@@ -13,6 +13,8 @@ var otherObjArray = new Array(25);//其他人物存放数组（其他人物个�
 var leftSiteObjArray = new Array(28);//定义左侧位置数组(人物会随机分配到对应的位置上)
 var rightSiteObjArray = new Array(28);//定义右侧位置数组(人物会随机分配到对应的位置上)
 var randomOtherChangeCampNum = 6; //其他人物随机变动阵营的人数最大值+1
+var havingItem = false;//是否正在答题
+var countDown = 5;//答题的倒计时数字
 
 //定义背景图片对象
 var bgImageObj = {
@@ -103,6 +105,29 @@ var drawGaming = function(){
 		var otherTemp = otherObjArray[i];
 		ctx.drawImage(otherTemp.imgArray[otherTemp.currentImgIndex],otherTemp.x,otherTemp.y);
 	}
+	//画出题目和选项
+	//if(havingItem){
+	if(true){
+		//题目背景图
+        ctx.drawImage(titleImage, canvas.width/2-150, 20);
+        //画出底部a,b选项按钮
+        ctx.drawImage(buttonImage0, 20, canvas.height-100);
+        ctx.drawImage(buttonImage0, canvas.width-(170+20), canvas.height-100);
+        //画出试题
+        ctx.fillStyle="rgb(0,0,0)";
+        ctx.font="24px Helvetica";
+        ctx.textAlign="left";
+        ctx.textBaseline="top";
+        ctx.fillText(items[0].title,canvas.width/2-150+12,20+45);
+        //画出选项
+        ctx.textAlign="center";
+        ctx.fillText(items[0].a,20+150/2, canvas.height-100+8);
+        ctx.fillText(items[0].b,canvas.width-(170+20)+150/2, canvas.height-100+8);
+        //画出倒计时数字
+        ctx.fillStyle="rgb(255,0,0)";
+        // ctx.textAlign="left";
+        ctx.fillText(countDown,canvas.width/2-2, 29);
+    }
 	if(gameing){
 		requestAnimationFrame(drawGaming);
 	}
