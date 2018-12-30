@@ -51,7 +51,7 @@ var actionStartGameButton = function(touchX,touchY){
             aButton.img = buttonImage1;
             bButton.img = buttonImage0;
             if(me.x>=canvas.width/2){
-                moveObjToNewSit(me);
+                changeMeObjCamp(me);
             }
         }
     }
@@ -62,7 +62,7 @@ var actionStartGameButton = function(touchX,touchY){
             aButton.img = buttonImage0;
             bButton.img = buttonImage1;
             if(me.x<=canvas.width/2){
-                moveObjToNewSit(me);
+                changeMeObjCamp(me);
             }
         }
     }

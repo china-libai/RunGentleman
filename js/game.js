@@ -349,6 +349,34 @@ var moveObjToNewSit = function(obj){
 	}
 }
 
+//变动我的人物阵营
+var changeMeObjCamp = function(meOjb){
+    if(meOjb.camp == 'left'){//左侧阵营的变换到右侧阵营
+        //释放左侧阵营的位置
+        var siteObjTemp=leftSiteObjArray[meOjb.siteObjArrayIdx];
+        siteObjTemp.used=false;
+        //获取右侧阵营的空闲位置
+        var rightSiteObjTemp=generateRightUnusedSitObj();
+        if(rightSiteObjTemp != undefined){//还有空的话才移动
+            meOjb.siteObjArrayIdx=rightSiteObjTemp.arrIdx;
+            rightSiteObjTemp.used=true;
+            //移动这个人物到新的位置
+            moveObjToNewSit(meOjb);
+        }
+    }else{//右侧阵营变换到左侧阵营
+        //释放右侧阵营的位置
+        var siteObjTemp=rightSiteObjArray[meOjb.siteObjArrayIdx];
+        siteObjTemp.used=false;
+        //获取左侧阵营的空闲位置
+        var leftSiteObjTemp=generateLeftUnusedSitObj();
+        if(leftSiteObjTemp != undefined){//还有空的话才移动
+            meOjb.siteObjArrayIdx=leftSiteObjTemp.arrIdx;
+            leftSiteObjTemp.used=true;
+            //移动这个人物到新的位置
+            moveObjToNewSit(meOjb);
+        }
+    }
+}
 //随机变动其他人物的阵营
 var changeOtherObjCamp = function(){
 	//确定随机的人数
